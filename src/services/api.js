@@ -27,14 +27,9 @@ export const recordSale = (saleData) => API.post('/sales/record', saleData);
 export const getInventoryReport = () => API.get('/dashboard/inventory');
 
 // Updated getSalesReport to handle optional date range parameters
-export const getSalesReport = ({ startDate, endDate } = {}) => {
-  const params = new URLSearchParams();
-  if (startDate) params.append('startDate', startDate);
-  if (endDate) params.append('endDate', endDate);
-
+export const getSalesReport = ({ startDate, endDate, storeId, timeFrame }) => {
+  const params = new URLSearchParams({ startDate, endDate, storeId, timeFrame });
   return API.get(`/dashboard/sales?${params.toString()}`);
 };
-
-export const getWeeklySalesReport = () => API.get('/dashboard/weekly-sales');
 
 export default API;

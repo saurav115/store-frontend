@@ -28,7 +28,7 @@ function App() {
       <Router>
         <div style={{ display: 'flex' }}>
           <Sidebar />
-          <main style={{ flexGrow: 1, padding: '20px', background: '#eee' }}>        
+          <main style={{ flexGrow: 1, padding: '20px', background: '#eee', minHeight: '100vh' }}>        
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />

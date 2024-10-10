@@ -104,9 +104,7 @@ const Products = () => {
 
   return (
     <Box>
-      {/* Upload Button */}
-
-      {/* Filter Form */}
+    
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
 
         <Paper
@@ -206,10 +204,7 @@ const Products = () => {
             <AddIcon color="secondary" />
           </IconButton>
         </Paper>
-
-        {/* <Button variant="contained"  size="small"  color="primary" onClick={fetchProducts}>
-          Search
-        </Button> */}
+    
       </Box>
 
       {/* Modal for Product Upload */}
