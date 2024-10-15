@@ -60,6 +60,14 @@ const Products = () => {
     fetchProducts();
   }, [filters, page, rowsPerPage]);
 
+  const handleSearchChange = (event) => {
+    setFilters({ ...filters, productName: event.target.value });
+  };
+  
+  const handleSearchClick = () => {
+    fetchProducts(); // Fetch products with the updated filters
+  };
+
   const getStoreNameById = (id) => {
     return stores?.filter(s => s.storeId == id)[0]?.storeName || "Other";
   } 
@@ -197,9 +205,11 @@ const Products = () => {
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search Product"
+            value={filters.productName}
+            onChange={handleSearchChange}
             inputProps={{ 'aria-label': 'search product' }}
           />
-          <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+          <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={handleSearchClick} >
             <SearchIcon />
           </IconButton>
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
