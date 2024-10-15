@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { uploadPricingFeed } from '../services/api';
-import { Button, Typography, CircularProgress, Box, IconButton } from '@mui/material';
+import { Button, Typography, CircularProgress, Box, IconButton, Alert } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
@@ -39,7 +39,7 @@ const ProductUpload = ({ onUploadSuccess }) => {
       }
     } catch (error) {
       console.error('Error uploading file', error);
-      toast.error('Error uploading file');
+      toast.error(error?.response?.data?.message || 'Error uploading file');
     } finally {
       setLoading(false); 
     }
@@ -64,9 +64,9 @@ const ProductUpload = ({ onUploadSuccess }) => {
           color="primary"
           component="span"
           onClick={() => document.getElementById('file-input').click()}
-          sx={{ marginBottom: '16px' }}
+          sx={{ marginBottom: '16px', padding: '20px', display: 'flex', flexDirection: 'column'}}
         >
-          <CloudUploadIcon sx={{ fontSize: 50 }} />
+          <CloudUploadIcon sx={{ fontSize: 50 }} /> <span style={{fontSize: '16px'}}>Choose file</span>
         </IconButton>
 
         {file && <Typography variant="body2">{file.name}</Typography>} {/* Show file name if selected */}
@@ -81,6 +81,7 @@ const ProductUpload = ({ onUploadSuccess }) => {
           Upload
         </Button>
 
+        <Alert severity="info">CSV file should have these required headers ['Store ID', 'SKU', 'Prod ID', 'Product Name', 'Price']</Alert>
         {loading && <CircularProgress />} {/* Loader shown during API call */}
       </Box>
 

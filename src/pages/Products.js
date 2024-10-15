@@ -60,6 +60,9 @@ const Products = () => {
     fetchProducts();
   }, [filters, page, rowsPerPage]);
 
+  const getStoreNameById = (id) => {
+    return stores?.filter(s => s.storeId == id)[0]?.storeName || "Other";
+  } 
   // Handle change in pagination (page and rows per page)
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -214,7 +217,7 @@ const Products = () => {
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <Box sx={{ width: 400, padding: 4, backgroundColor: 'white', margin: '50px auto', borderRadius: 2 }}>
+        <Box sx={{ width: 600, padding: 1, backgroundColor: 'white', margin: '50px auto', borderRadius: 2 }}>
           <ProductUpload onUploadSuccess={handleUploadSuccess} />
         </Box>
       </Modal>
@@ -249,8 +252,8 @@ const Products = () => {
                 <TableRow key={product['Prod ID']}>
                   <TableCell>{product['Product Name']}</TableCell>
                   <TableCell>{product['SKU']}</TableCell>
-                  <TableCell>${product['Price']}</TableCell>
-                  <TableCell>{product['Store ID']}</TableCell>
+                  <TableCell>Rs{product['Price']}</TableCell>
+                  <TableCell>{getStoreNameById(product['Store ID'])}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleOpenEdit(product)}>
                       <EditIcon />
